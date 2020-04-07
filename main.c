@@ -23,7 +23,7 @@ int main() {
     OldAbsorp.acr=5;
 
     param_iir myIIR;
-    init_iir(myIIR);
+    init_iir(&myIIR);
 
     MyNewAbsorp = iir(&OldAbsorp, &myIIR);
     printf("OldAbsorb acir = %f , OldAbsorb acr = %f \n", OldAbsorp.acir, OldAbsorp.acr);

@@ -7,7 +7,7 @@
 absorp iirTest(char* filename){ //absorp est un objet structurÃ©
     absorp exit_FIR_Value; //valeur de ACir, ACr, DCir et DCr en sortie du filtre FIR = entrÃ©e du filtre IRR
     param_iir myIIR;//Strucutre paramÃ¨tre du signal IIR (Coef, et valeur prÃ©cÃ©dentes filtrÃ©es et non filtrÃ©es par IIR)
-    init_iir(myIIR);
+    init_iir(&myIIR);
     absorp myAbsorp; //Valeur de ACir, ACr, DCir et DCr en sortie du filtre IRR
     int etat=0; //compte le nombre de valaure envoyÃ©es au filtre IRR
     FILE* p_Fichier_exitFIR = initFichier(filename);//Ouverture en lecture du fichier, renvoie un pointeur sur p_Fichier_exitFIIR
@@ -33,8 +33,8 @@ absorp iir(absorp* exit_FIR_Value, param_iir* myIIR ){
     return myAbsorp ;
 }
 
-void init_iir(param_iir myIIR){
-    myIIR.ALPHA = 0.992; //Initialisation de la valaur alpha constante
-    myIIR.precedentValue.acir = 0 ;//initalisation des valeur "-1" (prÃ©cÃ©dentes)  Ã  0
-    myIIR.precedentValue.acr = 0 ;
+void init_iir(param_iir* myIIR){
+    myIIR->ALPHA = 0.992; //Initialisation de la valaur alpha constante
+    myIIR->precedentValue.acir = 0 ;//initalisation des valeur "-1" (prÃ©cÃ©dentes)  Ã  0
+    myIIR->precedentValue.acr = 0 ;
 }
