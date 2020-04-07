@@ -19,15 +19,14 @@ int main() {
    */
     absorp OldAbsorp;
     absorp MyNewAbsorp;
-    OldAbsorp.acir=3;
-    OldAbsorp.acr=5;
+    OldAbsorp.acir=250;
+    OldAbsorp.acr=300;
 
-    param_iir myIIR;
+    param_iir myIIR = {0}; //essaie d'initalisation en mettant à 0
     init_iir(&myIIR);
-
-    MyNewAbsorp = iir(&OldAbsorp, &myIIR);
-    printf("OldAbsorb acir = %f , OldAbsorb acr = %f \n", OldAbsorp.acir, OldAbsorp.acr);
-    printf("MyNewAbsorp acir = %f , MyNewAbsorp acr = %f \n", MyNewAbsorp.acir, MyNewAbsorp.acr);
+    MyNewAbsorp = iir(OldAbsorp, &myIIR);
+    printf("OldAbsorp acir = %f , OldAbsorb acr = %f \n", OldAbsorp.acir, OldAbsorp.acr);
+    printf("MynewAbsorp cir = %f , MyNewAbsorp acr = %f \n", MyNewAbsorp.acir, MyNewAbsorp.acr);
 
 
     return 0;

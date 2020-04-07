@@ -1,6 +1,6 @@
 
 
-# -g option enables debugging mode 
+# -g option enables debugging mode
 # -c flag generates object code for separate files
 
 
