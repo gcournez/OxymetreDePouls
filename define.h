@@ -31,8 +31,8 @@ typedef struct {
   ------------------------------------------------------------*/
 
 typedef struct{
-		int spo2;  /*!< SPO2 */
-		int pouls;  /*!< Pouls */
+    int spo2;  /*!< SPO2 */
+	int pouls;  /*!< Pouls */
 	} oxy;
 
 /*! ------------------------------------------------------------
@@ -43,10 +43,10 @@ typedef struct{
 
   ------------------------------------------------------------*/
 typedef struct{
-        float factor[51];  // les coefficients
-        absorp prev[51];   // Les 51 dernières valeurs
-        int curent;        // indice de la dernière valeur
-        int first;         // indice de la plus anciène valeur
+    float factor[51];  // les coefficients
+    absorp prev[51];   // Les 51 dernières valeurs
+    int curent;        // indice de la dernière valeur
+    int first;         // indice de la plus anciène valeur
     }param_fir;
 
 /*! ------------------------------------------------------------
@@ -62,7 +62,5 @@ typedef struct{
     absorp precedentIIR_Value; //chcamp pour y(n-1) la valeur précédement filtrée.
     float ALPHA;
 } param_iir;
-
-
 
 #endif // DEFINE_H

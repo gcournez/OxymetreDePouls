@@ -2,43 +2,47 @@
 #include "fichiers.h"
 
 absorp firTest(char* filename){
-	absorp	myAbsorp,myAbsorp2; //deux structure absorp pour ne par perdre la dernière
+	absorp	myAbsorpInput,myAbsorpOutput; // input et output du filtre
 	int etat=0;
-	FILE* entree=fopen(filename,"r"); //Ouverture du fichier
+	FILE* p_Fichier=initFichier(filename); //Ouverture du fichier
 	param_fir myFIR;
 	init_fir(&myFIR);// création et innitialisation de myFIR
-    myAbsorp=lireFichier(entree,&etat); // lecture première ligne
+    myAbsorpInput=lireFichier(p_Fichier, &etat); // lecture première ligne
+
 	while (etat!= EOF) {
-        myAbsorp2=fir(myAbsorp,&myFIR); // filtrage
-        myAbsorp=lireFichier(entree,&etat); // lecture ligne suivante
+        myAbsorpOutput=fir(myAbsorpInput, &myFIR); // filtrage
+        myAbsorpInput=lireFichier(p_Fichier, &etat); // lecture ligne suivante
     }
-	return myAbsorp2; // On retourne la derière ligne filtrée sans risquer de retourner une erreur de lecture
+	finFichier(p_Fichier);
+	return myAbsorpOutput; // On retourne la derière ligne filtrée sans risquer de retourner une erreur de lecture
 }
 
 absorp fir(absorp myAbsorp, param_fir* myFIR){
-    int i=myFIR->curent, j =50 ,end=0;
+    int indexPrev=myFIR->curent, indexFactor =50 ,end=0;
     float sommeR=0,sommeIR=0;
-    myFIR->prev[i]=myAbsorp;
+    myFIR->prev[indexPrev]=myAbsorp;
     while (!end){
-        sommeR  += myFIR->prev[i] .acr  * myFIR->factor[j]; // Calcul somme pondéré R
-        sommeIR += myFIR->prev[i] .acir * myFIR->factor[j]; // Calcul somme pondéré IR
+        sommeR  += myFIR->prev[indexPrev] .acr * myFIR->factor[indexFactor]; // Calcul somme pondéré R
+        sommeIR += myFIR->prev[indexPrev] .acir * myFIR->factor[indexFactor]; // Calcul somme pondéré IR
 
-        j--;
-        if (i==myFIR->first){
+        indexFactor--;
+        if (indexPrev == myFIR->first){
             end=1; // Condition d'arret
         }
         else{ // tableau en boucle
-            if (i==0){
-                i=50;
+            if (indexPrev == 0){
+                indexPrev=50;
             }
             else{
-                i--;
+                indexPrev--;
             }
         }
     }
-    myAbsorp.acir=(int) sommeIR;
-    myAbsorp.acr=(int) sommeR;
 
+    myAbsorp.acir= sommeIR; //résultat du filtre
+    myAbsorp.acr= sommeR;
+
+    // gestion tableau circulaire
     if (myFIR->first==50){
         myFIR->curent++;
         myFIR->first=0;
