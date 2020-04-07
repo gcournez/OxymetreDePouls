@@ -61,7 +61,8 @@ typedef struct{
     absorp precedentValue; //champ pour la valaur précédente de iir pendant le calcul du filtrage.
     absorp precedentIIR_Value; //chcamp pour y(n-1) la valeur précédement filtrée.
     float ALPHA;
-    } param_iir;
+} param_iir;
+
 
 
 #endif // DEFINE_H
