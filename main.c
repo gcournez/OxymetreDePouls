@@ -12,19 +12,14 @@
 int main() {
     chdir(".."); // positionnement dans le bon repertoire courant
 
-   //integrationTest("record_file/record1.dat");
 
 
+    //Lecture test
     int file_state = 0;
     absorp test;
     FILE* fichier = NULL;
-    //fichier = fopen("test.txt", "r");
     FILE*  file_pf =initFichier("record_file/record1_bin.dat");
-
     test=lecture(file_pf,&file_state);
-
-
-
 
 
    /*
@@ -32,6 +27,8 @@ int main() {
     printf("acr=%f   acir=%f\n",myAbsorp.acr,myAbsorp.acir);
     myAbsorp=iirTest("record_file/record1_fir.dat");
     printf("acr=%f   acir=%f\n",myAbsorp.acr,myAbsorp.acir);
+
+
 
 
     oxy myOxy = mesureTest("record_file/record1_fir.dat");
