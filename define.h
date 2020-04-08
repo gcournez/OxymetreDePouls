@@ -63,4 +63,41 @@ typedef struct{
     float ALPHA;
 } param_iir;
 
+/*! ------------------------------------------------------------
+
+  \struct param_couleur
+
+  \brief
+
+  ------------------------------------------------------------*/
+
+typedef struct{
+    float acMax; // valeur min et max de ac
+    float acMin;
+    float dcMin; // valeur de cd pour ac min et max
+    float dcMax;
+    int BPM[5]; // 5 derières valeurs de BPM pour moyenne
+    int indice; // indice du tableau circulaire
+    float quotient; // valeur du résulat de ptp/dc
+    int countEchantillon; // Nombre de point pendant la période
+    int etat;
+
+} param_couleur;
+
+/*! ------------------------------------------------------------
+
+  \struct param_mesure
+
+  \brief
+
+  ------------------------------------------------------------*/
+
+typedef struct{
+    param_couleur R; //valeurs correspondante au donnée Rouge
+    param_couleur IR; //valeurs correspondante au donnée Infra Rouge
+    oxy myOxy;
+
+} param_mesure;
+
+
 #endif // DEFINE_H

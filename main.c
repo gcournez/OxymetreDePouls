@@ -4,6 +4,7 @@
 #include "fichiers.h"
 #include "define.h"
 #include "affichage.h"
+#include "mesure.h"
 #include "integration.h"
 #include "lecture.h"
 
@@ -31,6 +32,12 @@ int main() {
     printf("acr=%f   acir=%f\n",myAbsorp.acr,myAbsorp.acir);
     myAbsorp=iirTest("record_file/record1_fir.dat");
     printf("acr=%f   acir=%f\n",myAbsorp.acr,myAbsorp.acir);
+
+
+    oxy myOxy = mesureTest("record_file/record1_fir.dat");
+    printf("oxy=%d   pouls=%d\n",myOxy.spo2,myOxy.pouls);
+
+
     */
 
     /*
