@@ -4,16 +4,21 @@
 #include "fichiers.h"
 #include "define.h"
 #include "affichage.h"
+#include "integration.h"
 
 
 int main() {
     chdir(".."); // positionnement dans le bon repertoire courant
 
+   integrationTest("record_file/record1_bin.dat");
+
+
+   /*
     absorp myAbsorp = firTest("record_file/record1.dat");
     printf("acr=%f   acir=%f\n",myAbsorp.acr,myAbsorp.acir);
     myAbsorp=iirTest("record_file/record1_fir.dat");
     printf("acr=%f   acir=%f\n",myAbsorp.acr,myAbsorp.acir);
-
+    */
 
     /*
    * Filtre IIR
