@@ -1,18 +1,22 @@
 #include <stdio.h>
 #include "iir.h"
 #include "fir.h"
-#include "fichiers.h"
 #include "define.h"
 #include "affichage.h"
+#include "mesure.h"
 
 
 int main() {
-    //chdir(".."); // positionnement dans le bon repertoire courant
+    chdir(".."); // positionnement dans le bon repertoire courant
 
+    /*
     absorp myAbsorp = firTest("record_file/record1.dat");
     printf("acr=%f   acir=%f\n",myAbsorp.acr,myAbsorp.acir);
     myAbsorp=iirTest("record_file/record1_fir.dat");
     printf("acr=%f   acir=%f\n",myAbsorp.acr,myAbsorp.acir);
+    */
+    oxy myOxy = mesureTest("record_file/record1_fir.dat");
+    printf("oxy=%d   pouls=%d\n",myOxy.spo2,myOxy.pouls);
 
 
 
