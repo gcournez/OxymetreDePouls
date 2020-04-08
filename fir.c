@@ -117,8 +117,8 @@ void init_fir(param_fir* myFIR){
             1.6465231e-004,
             1.4774946e-019
     };
-
-    for (int i = 0; i < 51; ++i) {
+    int i;
+    for (i = 0; i < 51; ++i) {
         myFIR->factor[i]=FIR_TAPS[i]; // recopie des coefficient dans la structure
     }
     myFIR->curent=0;

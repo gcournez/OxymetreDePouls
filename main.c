@@ -7,12 +7,13 @@
 
 
 int main() {
-    chdir(".."); // positionnement dans le bon repertoire courant
+    //chdir(".."); // positionnement dans le bon repertoire courant
 
     absorp myAbsorp = firTest("record_file/record1.dat");
     printf("acr=%f   acir=%f\n",myAbsorp.acr,myAbsorp.acir);
     myAbsorp=iirTest("record_file/record1_fir.dat");
     printf("acr=%f   acir=%f\n",myAbsorp.acr,myAbsorp.acir);
+
 
 
     /*
