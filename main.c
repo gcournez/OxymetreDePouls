@@ -5,12 +5,25 @@
 #include "define.h"
 #include "affichage.h"
 #include "integration.h"
+#include "lecture.h"
 
 
 int main() {
     chdir(".."); // positionnement dans le bon repertoire courant
 
-   integrationTest("record_file/record1_bin.dat");
+   //integrationTest("record_file/record1.dat");
+
+
+    int file_state = 0;
+    absorp test;
+    FILE* fichier = NULL;
+    //fichier = fopen("test.txt", "r");
+    FILE*  file_pf =initFichier("record_file/record1_bin.dat");
+
+    test=lecture(file_pf,&file_state);
+
+
+
 
 
    /*

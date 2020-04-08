@@ -25,7 +25,5 @@ void integrationTest(char* filename)
         //myOxy_result = mesure(myAbsorp,myMes);//calcul de SPO2 de des puls du signal
         affichage(myOxy_result);//Affichage résultat
         }
-
-
     finFichier(myFile);//fermeture du fichier filename
 }
