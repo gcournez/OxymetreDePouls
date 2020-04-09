@@ -4,11 +4,10 @@
 
 absorp lecture(FILE* file_pf,  int* file_state){// poiteur à mon fichier et pointeur à l'état de mon fichier
 
-    absorp myAbsorp={0};
+    absorp myAbsorp={0};//initialisation à 0 des valeurs AC et DC
     char actualCaractere = 0;
     int i =0; //indice
     char tramDataStr[21]; //Tableau pour stocker chaque caractère de la tram, taille d'une tram = 21 caratèrere
-
 
     if(file_pf == NULL) { //vérification que le fichier est bien lu
         *file_state = EOF; // fin de fichier
@@ -17,17 +16,11 @@ absorp lecture(FILE* file_pf,  int* file_state){// poiteur à mon fichier et poi
         while (*file_state != EOF){ // boucle pour traverser tout le fichier.
             while (i<21){ //boucle pour obetenir les 21 caractères de la tram
                 actualCaractere = (char)fgetc(file_pf); //lecture caractère par caractère
-                //printf("%c",actualCaractere); //test print values
-
-
-
-
 
                 if (strcmp("\r", &actualCaractere) == 0) { //si on arrive à la fin de la ligne
                     //actualCaractere = (char)fgetc(file_pf); //passage à la ligne suivante
                     *file_state += 21; // le nombre de trame en faisant file_state%21
                     i = 21;
-
                 }
                 if(actualCaractere == EOF){ //arrivée au dernie caractère
                     *file_state = EOF; //fin de fichier
@@ -38,12 +31,12 @@ absorp lecture(FILE* file_pf,  int* file_state){// poiteur à mon fichier et poi
             }
             i=0;//Revenir au début du tableau
 
-
             /*          Exemple format de du tabelau tramDatastr
              *     ____________________________________________________________________________________
-             *    [     ACr      | , |       DCr     | , |      ACir     | , |   DCir       | LF | RC ]
-             *    [2 | 0 | 8 | 5 | , | 2 | 0 | 3 | 0 | , | 2 | 0 | 2 | 7 | , | 2 | 0 | 3 | 0 |   |    ] = tramDataStr
-             *    [32| 30| 38| 35| 2C| 32| 30| 33| 30| 2C| 32| 30| 33| 37| 2C| 32| 30| 33| 30|   |    ]
+             *    [     ACr      | , |       DCr     | , |      ACir     | , |      DCir     |LF |CR ]
+             *    [2 | 0 | 8 | 5 | , | 2 | 0 | 3 | 0 | , | 2 | 0 | 2 | 7 | , | 2 | 0 | 3 | 0 |\n |\r ] = tramDataStr en string
+             *    [32| 30| 38| 35| 2C| 32| 30| 33| 30| 2C| 32| 30| 33| 37| 2C| 32| 30| 33| 30|0A |0D ] = Correspondance en ASSCI (hexa)
+             *    [50| 48| 56| 53| 44| 50| 48| 51| 30| 44| 32| 48| 50| 55| 44| 50| 48| 51| 30|10 |13 ] = Correspondance en int
              *
             */
             //-48 pour passer de ASCII à un nombre entier.
