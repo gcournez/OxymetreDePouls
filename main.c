@@ -13,6 +13,7 @@ int main() {
     chdir(".."); // positionnement dans le bon repertoire courant
 
     integrationTest("record_file/record1.dat");
+    //integrationTest("record_file/record1_bin.dat");
 
 
     /*Lecture test

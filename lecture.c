@@ -5,7 +5,7 @@
 absorp lecture(FILE* file_pf,  int* file_state){// poiteur à mon fichier et pointeur à l'état de mon fichier
 
     absorp myAbsorp={0};//initialisation à 0 des valeurs AC et DC
-    char actualCaractere = 0;
+    char actualCaractere = 0;//
     int i =0; //indice
     char tramDataStr[21]; //Tableau pour stocker chaque caractère de la tram, taille d'une tram = 21 caratèrere
 
@@ -13,23 +13,20 @@ absorp lecture(FILE* file_pf,  int* file_state){// poiteur à mon fichier et poi
         *file_state = EOF; // fin de fichier
         printf("Pas de fichier en entrée de lecture");//Affiche une erreur de lecture de fichier
     }else{
-        while (*file_state != EOF){ // boucle pour traverser tout le fichier.
-            while (i<21){ //boucle pour obetenir les 21 caractères de la tram
-                actualCaractere = (char)fgetc(file_pf); //lecture caractère par caractère
-
-                if (strcmp("\r", &actualCaractere) == 0) { //si on arrive à la fin de la ligne
-                    //actualCaractere = (char)fgetc(file_pf); //passage à la ligne suivante
-                    *file_state += 21; // le nombre de trame en faisant file_state%21
-                    i = 21;
-                }
-                if(actualCaractere == EOF){ //arrivée au dernie caractère
-                    *file_state = EOF; //fin de fichier
-                }else{
-                    tramDataStr[i]= (actualCaractere);//remplir la tram dans le tableau
-                }
-                i+=1;//incrémentation
+        for(i=0; i<21; i++){ //boucle pour obetenir les 21 caractères de la tram
+            actualCaractere = (char)fgetc(file_pf); //lecture caractère par caractère et curseur change automatiquement tant que file_pf ouvert
+            /*
+            if (strcmp("\r", &actualCaractere) == 0) { //si on arrive à la fin de la ligne
+                //*file_state += 21; // le nombre de trame en faisant file_state%21
+                i = 21;
             }
-            i=0;//Revenir au début du tableau
+             */
+            if(actualCaractere == EOF){ //arrivée au dernie caractère
+                *file_state = EOF; //fin de fichier
+            }else{
+                tramDataStr[i]= (actualCaractere);//remplir la tram dans le tableau
+            }
+        }
 
             /*          Exemple format de du tabelau tramDatastr
              *     ____________________________________________________________________________________
@@ -47,14 +44,9 @@ absorp lecture(FILE* file_pf,  int* file_state){// poiteur à mon fichier et poi
 
             myAbsorp.acir -=2048 ; //Centrer acir en 0 car avant elles ocillaient entre 0 et 4096
             myAbsorp.acr -= 2048 ;//centrer acr en 0
-
             //printf("ACr = %f, DCr = %f, ACir = %f, DCir= %f \n",myAbsorp.acr, myAbsorp.dcr, myAbsorp.acir, myAbsorp.dcir);
-
-
         }
-    finFichier(file_pf);
-    }
-
+    //finFichier(file_pf);
 
 	return myAbsorp; // return EOF flag
 
