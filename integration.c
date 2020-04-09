@@ -4,6 +4,7 @@
 #include "iir.h"
 #include "fir.h"
 #include "mesure.h"
+#include "lecture.h"
 
 
 void integrationTest(char* filename)
@@ -11,10 +12,9 @@ void integrationTest(char* filename)
     int etat=0;
     FILE* myFile = initFichier(filename);
     absorp myAbsorp;
-    //oxy myOxy_result ={0};
-    param_fir myFIR ;
-    param_iir myIIR ;
-    param_mesure myMes ;
+    param_fir myFIR ={0};
+    param_iir myIIR ={0};
+    param_mesure myMes ={0};
     init_iir(&myIIR);// init IIR
     init_fir(&myFIR);//init FIR
     init_mesure(&myMes);//init mesure
@@ -24,6 +24,7 @@ void integrationTest(char* filename)
         myAbsorp = iir(myAbsorp,&myIIR);//Passage au filtre iir
         mesure(myAbsorp,&myMes);//calcul de SPO2 de des puls du signal
         affichage(myMes.myOxy);//Affichage résultat
+
         myAbsorp = lireFichier(myFile, &etat);
         }
     finFichier(myFile);//fermeture du fichier filename
