@@ -22,7 +22,7 @@ absorp iirTest(char* filename){ //absorp est un objet structuré
 }
 
 absorp iir(absorp exit_FIR_Value, param_iir* myIIR ){
-    absorp myAbsorp;
+    absorp myAbsorp=exit_FIR_Value;
     myAbsorp.acir =  (exit_FIR_Value.acir)  - (myIIR->precedentValue.acir) + (myIIR->ALPHA)* (myIIR->precedentIIR_Value.acir); //Calcul du filtre
     myAbsorp.acr = ((exit_FIR_Value.acr) - (myIIR->precedentValue.acr) + (myIIR->ALPHA) * (myIIR->precedentIIR_Value.acr));
 

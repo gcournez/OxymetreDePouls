@@ -25,9 +25,9 @@ void mesure(absorp myAbsorp,param_mesure* myMes){
     if (newPeriodR || newPeriodIR){ // si une des deux période est fini
         float RsIR= myMes->R.quotient/myMes->IR.quotient; // On calcul le rapport des quotients
         if (RsIR<1){ // table de correspondance entre RSIR etSpO2 deux fonctions affines avec intersection en 1
-            myMes->myOxy.spo2= -25*RsIR+110;
+            myMes->myOxy.spo2= (int) -25*RsIR+110;
         } else{
-            myMes->myOxy.spo2=-35.4*RsIR+120.4;
+            myMes->myOxy.spo2=(int) -35.4*RsIR+120.4;
         }
         int i,BPM_R=0,BPM_IR=0;
         for ( i = 0; i < 5; ++i) {
@@ -60,8 +60,10 @@ int machineEtat(float acValue,float dcValue, param_couleur* couleur){  // une m�
             }
             if (acValue > 0){
                 couleur->BPM[couleur->indice]= 30000 / couleur->countEchantillon;
+
                 couleur->indice=(couleur->indice+1)%5; // indice de mon tableau varie entre 0 et 5
                 couleur->quotient= 2 * (couleur->acMax - couleur->acMin) / (couleur->dcMax + couleur->dcMin); //Calcul du quotient PtP/Dc avec comme valeur de dc la moyenne des dc pour les valeurs de ac min et max
+
                 couleur->acMax=0;  // réinitialisation des min et max à 0
                 couleur->dcMax=0;
                 couleur->acMin=0;
