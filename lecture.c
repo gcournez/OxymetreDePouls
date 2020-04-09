@@ -19,17 +19,16 @@ absorp lecture(FILE* file_pf,  int* file_state){// poiteur à mon fichier et poi
                 actualCaractere = (char)fgetc(file_pf); //lecture caractère par caractère
                 //printf("%c",actualCaractere); //test print values
 
-                tramDataStr[i]= (actualCaractere);//remplir la tram dans le tableau
-
-
-
                 if (strcmp("\r", &actualCaractere) == 0) { //si on arrive à la fin de la ligne
                     //actualCaractere = (char)fgetc(file_pf); //passage à la ligne suivante
-                    *file_state += 21; // le nombre de trame en faisant file_state%21
+                    //*file_state += 21; // le nombre de trame en faisant file_state%21
                     i = 21;
 
-                }else if(actualCaractere == EOF){ //arrivée au dernie caractère
+                }if(actualCaractere == EOF){ //arrivée au dernie caractère de mon fichier
                     *file_state = EOF; //fin de fichier
+
+                }else{
+                    tramDataStr[i]= (actualCaractere);//remplir la tram dans le tableau
                 }
                 i+=1;//incrémentation
             }
