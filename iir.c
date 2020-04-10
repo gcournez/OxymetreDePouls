@@ -13,16 +13,21 @@ absorp iirTest(char* filename){ //absorp est un objet structuré
     int etat=0; //compte le nombre de valaure envoyées au filtre IRR
     FILE* p_Fichier_exitFIR = initFichier(filename);//Ouverture en lecture du fichier, renvoie un pointeur sur p_Fichier_exitFIIR
     exit_FIR_Value = lireFichier(p_Fichier_exitFIR, &etat);
+
     while(etat != EOF){
         myAbsorp = iir(exit_FIR_Value, &myIIR); // Calcul filtre
         exit_FIR_Value = lireFichier(p_Fichier_exitFIR, &etat);//Lecture du fichier
     }
+
     finFichier( p_Fichier_exitFIR);
     return myAbsorp;
+
 }
 
 absorp iir(absorp exit_FIR_Value, param_iir* myIIR ){
+
     absorp myAbsorp=exit_FIR_Value;
+
     myAbsorp.acir =  (exit_FIR_Value.acir)  - (myIIR->precedentValue.acir) + (myIIR->ALPHA)* (myIIR->precedentIIR_Value.acir); //Calcul du filtre
     myAbsorp.acr = ((exit_FIR_Value.acr) - (myIIR->precedentValue.acr) + (myIIR->ALPHA) * (myIIR->precedentIIR_Value.acr));
 

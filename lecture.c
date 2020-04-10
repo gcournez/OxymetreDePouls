@@ -17,7 +17,7 @@ absorp lecture(FILE* file_pf,  int* file_state){// poiteur à mon fichier et poi
             actualCaractere = (char)fgetc(file_pf); //lecture caractère par caractère et curseur change automatiquement tant que file_pf ouvert
             /*
             if (strcmp("\r", &actualCaractere) == 0) { //si on arrive à la fin de la ligne
-                //*file_state += 21; // le nombre de trame en faisant file_state%21
+                //  *file_state += 21; // le nombre de trame en faisant file_state%21
                 i = 21;
             }
              */
