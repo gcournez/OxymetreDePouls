@@ -28,9 +28,18 @@ absorp iir(absorp exit_FIR_Value, param_iir* myIIR ){
 
     absorp myAbsorp=exit_FIR_Value;
 
-    myAbsorp.acir =  (exit_FIR_Value.acir)  - (myIIR->precedentValue.acir) + (myIIR->alpha) * (myIIR->precedentIIR_Value.acir); //Calcul du filtre
-    myAbsorp.acr = ((exit_FIR_Value.acr) - (myIIR->precedentValue.acr) + (myIIR->alpha) * (myIIR->precedentIIR_Value.acr));
-    //y(n) = x(n) - x(n-1) + alpha
+    //Calcul des valeur au passage du filtre
+    //y(n) = x(n) - x(n-1) + alpha*y(n-1)
+
+    //Pour ACir
+    myAbsorp.acir = (exit_FIR_Value.acir); //y(n) = x(n)
+    myAbsorp.acir -= (myIIR->precedentValue.acir);//y(n)= y(n)-x(n-1)
+    myAbsorp.acir += (myIIR->alpha) * (myIIR->precedentIIR_Value.acir);//y(n)= y(n) + alpha *y(n-1)
+
+    //Pour ACr
+    myAbsorp.acr = (exit_FIR_Value.acr);//y(n) = x(n)
+    myAbsorp.acr -= (myIIR->precedentValue.acr);//y(n)= y(n)-x(n-1)
+    myAbsorp.acr += (myIIR->alpha) * (myIIR->precedentIIR_Value.acr);//y(n)= y(n) + alpha *y(n-1)
 
     myIIR->precedentValue = exit_FIR_Value; // La précédente valeur du signal d'entrée devient l'entrée actuelle de IRR soit la sortie de FIR
     myIIR->precedentIIR_Value = myAbsorp; // La dernière valeur filtrée devient la valeur filtrée actuelle (pour le prochain calcul de irr)
