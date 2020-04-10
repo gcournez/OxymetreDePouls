@@ -8,7 +8,6 @@ main.o: main.c
 	#gcc -c compile et assemble mais le link pas,
 	#-g paremètre autoriser le mode débug
 
-
 affichage.o: affichage.c
 	gcc -g -c -Wall affichage.c
 
@@ -39,7 +38,7 @@ clean:
 run: a.out
 	 ./a.out
 
-# Compiler le programme avec valgrind et les information de débug (toruvé sur internet)
+# Compiler le programme avec valgrind et les information de débug (trouvé sur internet)
 debug: a.out
 	valgrind a.out
 
